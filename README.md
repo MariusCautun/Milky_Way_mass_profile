@@ -82,7 +82,7 @@ where rspace_MCum gives the radial values from the Galactic Centre for which the
 ## Reference
 This code and accompanying input data are freely available. If using this code,
 a derivative work or results thereof, please cite:
-[Cautun et al(2020)](https://arxiv.org/abs/1911.04557)
+[Cautun et al (2020)](https://arxiv.org/abs/1911.04557)
 
 If you have any questions or would like help in using the code, please email:
 > marius 'dot' cautun 'at' gmail 'dot' com

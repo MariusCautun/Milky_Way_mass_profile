@@ -81,6 +81,11 @@ from Cautun20_galpy_potential import MCum_bar, MCum_DM, MCum_DM_contracted, rspa
 where rspace_MCum gives the radial values from the Galactic Centre for which the enclosed masses were calculated.
 
 
+## Contributors
+* **Marius Cautun (Leiden University)** 
+* **Thomas Callingham (Durham University)** - *Implemented the Galactic mass profile in galpy.*
+
+
 ## Reference
 This code and accompanying input data are freely available. If using this code,
 a derivative work or results thereof, please cite:
@@ -88,3 +93,8 @@ a derivative work or results thereof, please cite:
 
 If you have any questions or would like help in using the code, please email:
 > marius 'dot' cautun 'at' gmail 'dot' com
+
+
+## License
+
+This project is licensed under GNU GENERAL PUBLIC LICENSE Version 3 - see the [LICENSE.md](LICENSE.md) file for details.

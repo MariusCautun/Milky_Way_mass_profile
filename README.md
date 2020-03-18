@@ -48,7 +48,7 @@ import matplotlib.pyplot as plt
 plt.loglog( r, mass_DM * r**2, 'k-', label="original" )
 plt.loglog( r, mass_DM_contracted * r**2, 'r--', label="contracted" )
 ```
-This is a trivial example and the difference is a constant multiplication factor. When using realistic baryonic distribution, the difference between the original and the contracted DM profiles is more complex.
+This is a trivial example and the difference is a constant multiplication factor. When using realistic baryonic distributions, the difference between the original and the contracted DM profiles is more complex.
 
 The code also comes with a simple function that calculates the density given an array of enclosed masses. For best results, the enclosed masses should be defined on a fine grid of radial distances.
 ```
@@ -60,13 +60,23 @@ Density = density_from_enclosed_mass( r, mass_DM_contracted, r[1:-1] )
 
 ## Calculating orbits with the Cautun et al (2020) Galactic mass profile
 
-The package also comes with a set of python functions that implement the best fitting mass profile in the galpy package for galactic dynamics. The mass profile is contains of 7 components: a thin and a thick stellar disc, an HI and a molecular disc, a stellar bulge, a circumgalactic medium (CGM) component, and a contracted DM halo. To use this mass profile, just load the module included here (this will take about one minute since it performs some calculations when loading the module).
+The package also comes with a set of python functions that implement the best fitting mass profile in the galpy package for galactic dynamics. The mass profile contains 7 components: a thin and a thick stellar disc, an HI and a molecular disc, a stellar bulge, a circumgalactic medium (CGM) component, and a contracted DM halo. To use this mass profile, just load the module included here (this will take about one minute since it performs some calculations when loading the module).
 
 ```
 from Cautun20_galpy_potential import Cautun20
 ```
 Now Cautun20 is a potential including all the components described above. It can be used to calculate various galactic quantities such as circular rotation curve, stellar and satellite orbits. For examples, see the [galpy](https://docs.galpy.org/en/v1.5.0/#tutorials) documentation, such as the one associated to the various [Milky Way potentials](https://docs.galpy.org/en/v1.5.0/reference/potential.html#new-in-v1-5-milky-way-like-potentials) implemented within galpy.
 
+
+You can also access the various components of the potential, such as the halo or the bulge:
+```
+from Cautun20_galpy_potential import Cautun_halo, Cautun_disk, Cautun_bulge, Cautun_cgm,
+```
+Alternatively, if you need the spherically averaged enclosed DM or baryonic mass profiles, these have been calculated when loading the module and can be accessed as:
+```
+from Cautun20_galpy_potential import MCum_bar, MCum_DM, MCum_DM_contracted, rspace_MCum
+```
+where rspace_MCum gives the radial values from the Galactic Centre for which the enclosed masses were calculated.
 
 
 ## Reference

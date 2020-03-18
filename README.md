@@ -3,9 +3,9 @@
 
 A python code to: 
 
-i) calculate the contraction of the dark matter (DM) halo induced by the condensation of baryons at the centre of Milky Way mass haloes. These is based on studying state-of-the-art hydrodynamical simulations such as [EAGLE](https://ui.adsabs.harvard.edu/abs/2015MNRAS.446..521S/abstract), [Apostle](https://ui.adsabs.harvard.edu/abs/2016MNRAS.457.1931S/abstract) and [Auriga](https://ui.adsabs.harvard.edu/abs/2017MNRAS.467..179G/abstract).
+i) calculate the contraction of the dark matter (DM) halo induced by the condensation of baryons at the centre of Milky Way mass haloes. These results are based on studying state-of-the-art hydrodynamical simulations such as [EAGLE](https://ui.adsabs.harvard.edu/abs/2015MNRAS.446..521S/abstract), [Apostle](https://ui.adsabs.harvard.edu/abs/2016MNRAS.457.1931S/abstract) and [Auriga](https://ui.adsabs.harvard.edu/abs/2017MNRAS.467..179G/abstract).
 
-ii) implement the Milky Way mass profile into [galpy](https://docs.galpy.org/en/v1.5.0/), where it can be used to calculate various Galactic dynamics. The mass profile corresponds to the best fitting model given the [Eilers et al (2019)](https://ui.adsabs.harvard.edu/abs/2019ApJ...871..120E/abstract) Gaia DR2 rotation curve and the [Callingham et al (2019)](https://ui.adsabs.harvard.edu/abs/2019MNRAS.484.5453C/abstract) total mass measurement of our galaxy.
+ii) implement the Milky Way mass profile into [galpy](https://docs.galpy.org/en/v1.5.0/), where it can be used to perform various Galactic dynamic calculations. The mass profile corresponds to the best fitting model given the [Eilers et al (2019)](https://ui.adsabs.harvard.edu/abs/2019ApJ...871..120E/abstract) Gaia DR2 rotation curve and the [Callingham et al (2019)](https://ui.adsabs.harvard.edu/abs/2019MNRAS.484.5453C/abstract) total mass measurement of our galaxy.
 
 The code included here is based on the results and the best fitting Milky Way model that have been presented in [Cautun et al (2020)](https://arxiv.org/abs/1911.04557).  
 

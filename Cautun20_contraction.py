@@ -14,7 +14,7 @@ def contract_enclosed_mass( mass_DM, mass_bar, f_bar=0.157 ):
       Array of 'contracted' enclosed masses.
    """
     eta_bar = mass_bar / mass_DM * (1.-f_bar) / f_bar  # the last two terms account for transforming the DM mass into the corresponding baryonic mass in DMO simulations
-    increase_factor = 0.45 + 0.38 * (eta_bar + 1.)**0.53
+    increase_factor = 0.45 + 0.38 * (eta_bar + 1.16)**0.53
     return mass_DM * increase_factor
 
 

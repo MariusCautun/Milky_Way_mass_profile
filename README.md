@@ -25,7 +25,7 @@ if dir_path not in sys.path:
  
 ## The Milky Way radial mass profile
 
-If you are interested only in the spherically averaged mass profile of our galaxy, just download the [MW_enclosed_mass_profile.txt](https://github.com/MariusCautun/Milky_Way_mass_profile/blob/master/MW_enclosed_mass_profile.txt) ASCII file. It gives the enclosed mass and its associated 68 percentile confidence interval for a set of radial distances for: stars, all baryons, dark matter, and total matter. 
+If you are interested only in the spherically averaged mass profile of our galaxy, just download the [MW_enclosed_mass_profile.txt](./MW_enclosed_mass_profile.txt) ASCII file. It gives the enclosed mass and its associated 68 percentile confidence interval for a set of radial distances for: stars, all baryons, dark matter, and total matter. 
 
 
 ## Calculating the contracted DM profile for a distribution of baryons

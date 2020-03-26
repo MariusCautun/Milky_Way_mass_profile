@@ -1,7 +1,7 @@
 # The Milky Way potential according to Cautun et al (2020)
 **Last reviewed:** v1.0
 
-A python code to: 
+Contain a table (as an ASCII file) that gives the Milky Way radial mass profile and a python code to: 
 
 i) calculate the contraction of the dark matter (DM) halo induced by the condensation of baryons at the centre of Milky Way mass haloes. These results are based on studying state-of-the-art hydrodynamical simulations such as [EAGLE](https://ui.adsabs.harvard.edu/abs/2015MNRAS.446..521S/abstract), [Apostle](https://ui.adsabs.harvard.edu/abs/2016MNRAS.457.1931S/abstract) and [Auriga](https://ui.adsabs.harvard.edu/abs/2017MNRAS.467..179G/abstract).
 
@@ -23,6 +23,10 @@ if dir_path not in sys.path:
     sys.path.append( dir_path )
 ```
  
+## The Milky Way radial mass profile
+
+If you are interested only in the spherically averaged mass profile of our galaxy, just download the [MW_enclosed_mass_profile.txt](https://github.com/MariusCautun/Milky_Way_mass_profile/blob/master/MW_enclosed_mass_profile.txt) ASCII file. It gives the enclosed mass and its associated 68 percentile confidence interval for a set of radial distances for: stars, all baryons, dark matter, and total matter. 
+
 
 ## Calculating the contracted DM profile for a distribution of baryons
 

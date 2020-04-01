@@ -41,7 +41,7 @@ from Cautun20_contraction import NFW_enclosed_mass
 import numpy as np
 
 r = np.logspace( -1, 2, 61 )
-mass_total = NFW_enclosed_mass()      # total mass
+mass_total = NFW_enclosed_mass( r, M200=1.e12, conc=9 )      # total mass
 f_bar      = 0.157   # cosmic baryon fraction
 mass_DM    = mass_total * (1.-f_bar)  # DM mass
 mass_bar   = 0.                       # no baryons
@@ -49,18 +49,29 @@ mass_DM_contracted = contract_enclosed_mass( mass_DM, mass_bar, f_bar=f_bar )
 ```
 To see the difference, you can compare the original and contracted DM masses:
 ```
+# plot the enclosed mass (actually plots mass / r^2 to decrease the dynamical range)
+
 import matplotlib.pyplot as plt
 
-plt.loglog( r, mass_DM * r**2, 'k-', label="original" )
-plt.loglog( r, mass_DM_contracted * r**2, 'r--', label="contracted" )
+plt.loglog( r, mass_DM / r**2, 'k-', label="original" )
+plt.loglog( r, mass_DM_contracted / r**2, 'r--', label="contracted" )
+plt.legend()
+plt.show()
+
+plt.semilogx( r, mass_DM_contracted / mass_DM, label="contracted / original" )
+plt.legend()
 ```
 This is a trivial example and the difference is a constant multiplication factor. When using realistic baryonic distributions, the difference between the original and the contracted DM profiles is more complex.
 
 The code also comes with a simple function that calculates the density given an array of enclosed masses. For best results, the enclosed masses should be defined on a fine grid of radial distances.
 ```
 from Cautun20_contraction import density_from_enclosed_mass
+
 rvals = r[1:-1] 
 Density = density_from_enclosed_mass( r, mass_DM_contracted, r[1:-1] )
+
+# plot the density times r^2 (to decrease dynamical range)
+plt.loglog( rvals, Density * rvals**2 )
 ```
 
 

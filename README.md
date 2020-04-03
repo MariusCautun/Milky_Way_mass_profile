@@ -27,6 +27,8 @@ if dir_path not in sys.path:
 
 If you are interested only in the spherically averaged mass profile of our galaxy, just download the [MW_enclosed_mass_profile.txt](./MW_enclosed_mass_profile.txt) ASCII file. It gives the enclosed mass and its associated 68 percentile confidence interval for a set of radial distances for: stars, all baryons, dark matter, and total matter. 
 
+Examples of how to read in the data files and run various tasks are provided in the jupyter notebook file [example_notebook.ipynb](./example_notebook.ipynb) (this is saved as a pdf file at found [here](./example_notebook.pdf)). Some of the examples from the notebook are discussed below. 
+
 
 ## Calculating the contracted DM profile for a distribution of baryons
 
@@ -63,15 +65,14 @@ plt.legend()
 ```
 This is a trivial example and the difference is a constant multiplication factor. When using realistic baryonic distributions, the difference between the original and the contracted DM profiles is more complex.
 
-The code also comes with a simple function that calculates the density given an array of enclosed masses. For best results, the enclosed masses should be defined on a fine grid of radial distances.
+The code also comes with a simple function that calculates the contracted DM density. For best results, you need to give to the function the spherically averaged DM and baryon densities, as well as the enclosed DM and baryon masses at the same radial distances. The following code calculate the contracted DM density for the same case as above, that is for the case of zero baryonic mass.
 ```
-from Cautun20_contraction import density_from_enclosed_mass
+from Cautun20_contraction import contract_density, NFW_density
 
-rvals = r[1:-1] 
-Density = density_from_enclosed_mass( r, mass_DM_contracted, r[1:-1] )
+# First calculate the NFW radial density profile for the DM component for the same halo used for the enclosed mass calculation.
+density_NFW = NFW_density( r, M200=1.e12, conc=9 ) * (1.-f_bar)
 
-# plot the density times r^2 (to decrease dynamical range)
-plt.loglog( rvals, Density * rvals**2 )
+density_DM_contracted = contract_density( density_NFW, 0., mass_DM=mass_DM, mass_bar=mass_bar, f_bar=f_bar )
 ```
 
 

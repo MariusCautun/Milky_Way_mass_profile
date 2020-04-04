@@ -102,7 +102,7 @@ Cautun_unContracted = NFWPotential( conc=conc, mvir=m200/1.e12, vo=vo, ro=ro, H=
 
 
 # functions for calculating the contraction of the DM halo given the baryonic mass distribution
-def Uncontracted_DMDens(R,z): 
+def DM_Dens_uncontracted(R,z): 
     return Cautun_unContracted.dens( R, z, use_physical=False )
 
 def Baryon_Dens(R,z): #Total baryon profile in array friendly format
@@ -110,28 +110,29 @@ def Baryon_Dens(R,z): #Total baryon profile in array friendly format
     return TotalDens
 
 
-from Cautun20_contraction import potential_contract_mass_profile
-Contracted_rho_dm, rspace, MCum_bar, MCum_DM, MCum_DM_contracted, rspace_MCum = \
-        potential_contract_mass_profile( Uncontracted_DMDens, Baryon_Dens, f_bar=fb )
+from Cautun20_contraction import potential_contract_DM_halo
+rho_DM_contracted, MassCum_DM_contracted, MassCum_bar, MassCum_DM_uncontracted, rspace = \
+        potential_contract_DM_halo( DM_Dens_uncontracted, Baryon_Dens, f_bar=fb )
 
+
+from scipy import interpolate
+interpolated_rho_DM_contracted = interpolate.interp1d( rspace, rho_DM_contracted, fill_value="extrapolate" )
 
 def Contracted_DM_dens(R,z):
     r = np.sqrt( (R**2.) + (z**2.) )
-    #Ensure intepolation doesn't return errors
-    if r<rspace[0]:
-        return Contracted_rho_dm[0]
     if r>rspace[-1]: 
-        return Contracted_rho_dm[-1] * np.exp( 1 - ((r/rspace[-1])**2) )
-    contracted_dm_dens = np.interp( r, rspace, Contracted_rho_dm )
-    return contracted_dm_dens
+        return rho_DM_contracted[-1] * np.exp( 1 - ((r/rspace[-1])**2) )
+    return interpolated_rho_DM_contracted( r )
 
 Cautun_halo= SCFPotential(\
     Acos=scf_compute_coeffs_spherical( Contracted_DM_dens,60,a=50 )[0], a=50, ro=ro, vo=vo )
-# Go back to old floating-point warnings settings
-np.seterr(**old_error_settings)
 
 
 Cautun20 = Cautun_halo + Cautun_disk + Cautun_bulge + Cautun_cgm
+
+
+# Go back to old floating-point warnings settings
+np.seterr(**old_error_settings)
 
     
     

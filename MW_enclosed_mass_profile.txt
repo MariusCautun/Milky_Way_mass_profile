@@ -8,10 +8,9 @@
 # The columns are as follows:
 # (1)     radial distance in kpc
 # (2-4)   enclosed stellar mass in M_solar:   MLE, 68 percentile confidence interval
-# (5-7)   enclosed stellar mass in M_solar:   MLE, 68 percentile confidence interval
-# (8-10)  enclosed baryonic mass in M_solar:  MLE, 68 percentile confidence interval
-# (11-13) enclosed DM mass in M_solar:        MLE, 68 percentile confidence interval
-# (14-16) enclosed total mass in M_solar:     MLE, 68 percentile confidence interval
+# (5-7)  enclosed baryonic mass in M_solar:  MLE, 68 percentile confidence interval
+# (8-10) enclosed DM mass in M_solar:        MLE, 68 percentile confidence interval
+# (11-13) enclosed total mass in M_solar:     MLE, 68 percentile confidence interval
            1  5.919052e+09  -4.429812e+08  3.439775e+08   5.93626e+09  -4.429803e+08  3.442767e+08  2.106803e+09  -2.425564e+08  3.087655e+08  8.043063e+09  -4.239504e+08  3.982744e+08
            2  1.387569e+10  -8.702846e+08  6.979443e+08  1.395972e+10  -8.742046e+08  7.006042e+08  6.462282e+09  -6.827578e+08  8.826938e+08  2.042201e+10  -6.686383e+08  6.685616e+08
            3  2.044841e+10  -1.275216e+09    1.0599e+09  2.074827e+10  -1.278958e+09  1.068216e+09  1.183904e+10  -1.167577e+09   1.49929e+09  3.258731e+10  -6.336642e+08   7.28343e+08

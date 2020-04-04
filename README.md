@@ -94,7 +94,7 @@ Alternatively, if you need the spherically averaged enclosed DM or baryonic mass
 ```
 from Cautun20_galpy_potential import rspace, rho_DM_contracted, MassCum_DM_contracted, MassCum_bar, MassCum_DM_uncontracted
 ```
-where rspace_MCum gives the radial values from the Galactic Centre for which the enclosed masses were calculated.
+where rspace gives the radial values from the Galactic Centre for which the enclosed masses and density were calculated. Note that these quantities are expressed in internal galpy units.
 
 
 ## Contributors

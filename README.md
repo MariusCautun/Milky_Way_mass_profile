@@ -13,7 +13,7 @@ The code included here is based on the results and the best fitting Milky Way mo
 
 ## Getting Started
 
-This is a stand alone python code that only makes use of a few common python modules: numpy, scipy and [quadpy](https://github.com/nschloe/quadpy). For the potential, the code uses [galpy](https://docs.galpy.org/en/v1.5.0/), which can be downloaded [here](https://github.com/jobovy/galpy).
+This is a stand alone python code that only makes use of a few common python modules: numpy and scipy. For the potential, the code uses [galpy](https://docs.galpy.org/en/v1.5.0/), which can be downloaded [here](https://github.com/jobovy/galpy).
  
 You can just download the two python codes and either place them in the working directory, or point python towards the directory where the files are located. The latter can be done by adding the directory path to the environment variable $PYTHONPATH or by adding the path directly within python, for example using:
 ```

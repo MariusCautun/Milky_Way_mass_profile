@@ -63,7 +63,7 @@ plt.show()
 plt.semilogx( r, mass_DM_contracted / mass_DM, label="contracted / original" )
 plt.legend()
 ```
-This is a trivial example and the difference is a constant multiplication factor. When using realistic baryonic distributions, the difference between the original and the contracted DM profiles is more complex.
+This is a trivial example and the difference is a constant multiplication factor. When using realistic baryonic distributions, the difference between the original and the contracted DM profiles is more complex (see other examples in the [jupyter notebook](./example_notebook.ipynb)).
 
 The code also comes with a simple function that calculates the contracted DM density. For best results, you need to give to the function the spherically averaged DM and baryon densities, as well as the enclosed DM and baryon masses at the same radial distances. The following code calculate the contracted DM density for the same case as above, that is for the case of zero baryonic mass.
 ```
@@ -88,7 +88,7 @@ Now Cautun20 is a potential including all the components described above. It can
 
 You can also access the various components of the potential, such as the halo or the bulge:
 ```
-from Cautun20_galpy_potential import Cautun_halo, Cautun_disk, Cautun_bulge, Cautun_cgm,
+from Cautun20_galpy_potential import Cautun_halo, Cautun_disk, Cautun_bulge, Cautun_cgm
 ```
 Alternatively, if you need the spherically averaged enclosed DM or baryonic mass profiles, these have been calculated when loading the module and can be accessed as:
 ```

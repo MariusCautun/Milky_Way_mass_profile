@@ -13,7 +13,7 @@ The code included here is based on the results and the best fitting Milky Way mo
 
 ## Getting Started
 
-This is a stand alone python code that only makes use of a few common python modules: numpy and scipy. For the potential, the code uses [galpy](https://docs.galpy.org/en/v1.5.0/), which can be downloaded [here](https://github.com/jobovy/galpy).
+This is a stand alone python code that only makes use of a few common python modules: numpy, scipy and [quadpy](https://github.com/nschloe/quadpy). For the potential, the code uses [galpy](https://docs.galpy.org/en/v1.5.0/), which can be downloaded [here](https://github.com/jobovy/galpy).
  
 You can just download the two python codes and either place them in the working directory, or point python towards the directory where the files are located. The latter can be done by adding the directory path to the environment variable $PYTHONPATH or by adding the path directly within python, for example using:
 ```
@@ -88,11 +88,11 @@ Now Cautun20 is a potential including all the components described above. It can
 
 You can also access the various components of the potential, such as the halo or the bulge:
 ```
-from Cautun20_galpy_potential import Cautun_halo, Cautun_disk, Cautun_bulge, Cautun_cgm
+Cautun_halo, Cautun_Discs, Cautun_Bulge, Cautun_cgm = Cautun20
 ```
 Alternatively, if you need the spherically averaged enclosed DM or baryonic mass profiles, these have been calculated when loading the module and can be accessed as:
 ```
-from Cautun20_galpy_potential import MCum_bar, MCum_DM, MCum_DM_contracted, rspace_MCum
+from Cautun20_galpy_potential import rspace, rho_DM_contracted, MassCum_DM_contracted, MassCum_bar, MassCum_DM_uncontracted
 ```
 where rspace_MCum gives the radial values from the Galactic Centre for which the enclosed masses were calculated.
 

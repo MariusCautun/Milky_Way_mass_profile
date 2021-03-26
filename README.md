@@ -27,7 +27,7 @@ if dir_path not in sys.path:
 
 If you are interested only in the spherically averaged mass profile of our galaxy, just download the [MW_enclosed_mass_profile.txt](./MW_enclosed_mass_profile.txt) ASCII file. It gives the enclosed mass and its associated 68 percentile confidence interval for a set of radial distances for: stars, all baryons, dark matter, and total matter. These components are shown in the following figure:
 <p align="center">
-    <img src="figures/MW_components.png" width="400" title="A plot of the MW components contained in the 'MW_enclosed_mass_profile.txt' file."></a>
+    <img src="figures/MW_components.png" width="550" title="A plot of the MW components contained in the 'MW_enclosed_mass_profile.txt' file."></a>
 </p>  
 
 Examples of how to read in the data files and run various tasks are provided in the jupyter notebook file [example_notebook.ipynb](./example_notebook.ipynb) (this is saved also as a pdf file [here](./example_notebook.pdf)). Some of the examples from the notebook are discussed below. 

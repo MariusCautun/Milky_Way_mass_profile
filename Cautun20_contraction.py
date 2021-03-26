@@ -1,8 +1,11 @@
 import numpy as np
 from scipy import integrate
+from scipy import optimize
+
 
 def contract_enclosed_mass( mass_DM, mass_bar, f_bar=0.157 ):
     """ Returns the contracted DM enclosed mass given the 'uncontracted' profile and that of the baryonic distribution.
+    It uses Eq. (10) from Cautun et al (2020).
    
    Args:
       mass_DM       : enclosed mass in the DM component in the absence of baryons. 
@@ -13,9 +16,36 @@ def contract_enclosed_mass( mass_DM, mass_bar, f_bar=0.157 ):
    Returns:
       Array of 'contracted' enclosed masses.
    """
-    eta_bar = mass_bar / mass_DM * (1.-f_bar) / f_bar  # the last two terms account for transforming the DM mass into the corresponding baryonic mass in DMO simulations
-    increase_factor = 0.45 + 0.38 * (eta_bar + 1.16)**0.53
-    return mass_DM * increase_factor
+    func_M_DM_contract = lambda M, M_DMO, M_bar: 1.023 * (M_DMO/(1.-f_bar)/(M+M_bar))**-0.540 * M_DMO
+    return optimize.fixed_point( func_M_DM_contract, mass_DM.copy(), args=(mass_DM,mass_bar), xtol=1.e-6 )
+
+
+def contract_density( density_DM, density_bar, mass_DM, mass_bar, f_bar=0.157 ):
+    """ Returns the contracted DM density profile given the 'uncontracted' density and that of the baryonic distribution.
+    It uses the differential (d/dr) form of Eq. (10) from Cautun et al (2020).
+   
+   Args:
+      density_DM    : array of DM densities. 
+                          It corresponds to '(1-baryon_fraction) * density in
+                          DMO (dark matter only) simulations'.
+      density_bar   : array of baryonic densities.
+      mass_DM       : enclosed mass in the DM component in the absence of baryons. 
+                          It corresponds to '(1-baryon_fraction) * enclosed mass in
+                          DMO (dark matter only) simulations'.
+      mass_bar      : enclosed baryonic mass for which to calculate the DM profile.
+      f_bar         : optional cosmic baryonic fraction.
+   Returns:
+      Array of 'contracted' DM densities.
+   """
+    A, B = 1.023, -0.540
+    M_tot_DMO = mass_DM  / (1.-f_bar)
+    M_DM  = contract_enclosed_mass( mass_DM, mass_bar, f_bar=f_bar )
+    M_tot = M_DM + mass_bar
+    ratio = M_tot_DMO / M_tot
+    
+    func_dens_contract = lambda dens: A * (density_DM*ratio**B + B*mass_DM/M_tot*ratio**(B-1.) * (density_DM/(1.-f_bar)-ratio*(dens+density_bar))) 
+    return optimize.fixed_point( func_dens_contract, density_DM.copy(), args=(), xtol=1.e-6 )
+
 
 def enclosed_mass( r, density ):
     """ Calculates the enclosed mass.
@@ -37,9 +67,34 @@ def enclosed_mass( r, density ):
     
     return np.interp( r, r_edges[1:], (delta_V * density).cumsum() )
 
-def contract_density( density_DM, density_bar, mass_DM, mass_bar, f_bar=0.157 ):
+
+
+def contract_enclosed_mass_fit( mass_DM, mass_bar, f_bar=0.157 ):
+    """ Returns the contracted DM enclosed mass given the 'uncontracted' profile and that of the baryonic distribution.
+    
+    WARNING: This function is a fit to the iterative calculated result of the 'contract_enclosed_mass' and works best when the
+    baryonic fraction is close to the Planck (2015) value, f_bar=0.157. Do not use it if that is not the case.
+   
+   Args:
+      mass_DM       : enclosed mass in the DM component in the absence of baryons. 
+                          It corresponds to '(1-baryon_fraction) * enclosed mass in
+                          DMO (dark matter only) simulations'.
+      mass_bar      : enclosed baryonic mass for which to calculate the DM profile.
+      f_bar         : optional cosmic baryonic fraction.
+   Returns:
+      Array of 'contracted' enclosed masses.
+   """
+    eta_bar = mass_bar / mass_DM * (1.-f_bar) / f_bar  # the last two terms account for transforming the DM mass into the corresponding baryonic mass in DMO simulations
+    increase_factor = 0.45 + 0.41 * (eta_bar + 0.98)**0.53
+    return mass_DM * increase_factor
+
+
+def contract_density_fit( density_DM, density_bar, mass_DM, mass_bar, f_bar=0.157 ):
     """ Returns the contracted DM density profile given the 'uncontracted' density and that of the baryonic distribution.
     It uses the differential (d/dr) form of Eq. (11) from Cautun et al (2020).
+    
+    WARNING: This function is based on a fit to the iterative calculated result of the 'contract_enclosed_mass' and works best when the
+    baryonic fraction is close to the Planck (2015) value, f_bar=0.157. Do not use it if that is not the case.
    
    Args:
       density_DM    : array of DM densities. 
@@ -56,9 +111,9 @@ def contract_density( density_DM, density_bar, mass_DM, mass_bar, f_bar=0.157 ):
    """
         
     eta_bar = mass_bar / mass_DM * (1.-f_bar) / f_bar  # the last two terms account for transforming the DM mass into the corresponding baryonic mass in DMO simulations
-    first_factor = 0.45 + 0.38 * (eta_bar + 1.16)**0.53
+    first_factor = 0.45 + 0.41 * (eta_bar + 0.98)**0.53
     temp         = density_bar - eta_bar * density_DM * f_bar / (1.-f_bar)
-    const_term   = 0.38 * 0.53 * (eta_bar + 1.16)**(0.53-1.) * (1.-f_bar) / f_bar * temp
+    const_term   = 0.41 * 0.53 * (eta_bar + 0.98)**(0.53-1.) * (1.-f_bar) / f_bar * temp
     
     return density_DM * first_factor + const_term
 
@@ -81,6 +136,7 @@ def NFW_enclosed_mass( r, M200, conc, hFactor=0.6777 ):
     R200 = (M200 / (4.*np.pi/3. * 200. * rho_critical ))**(1./3.)
     xsi = r / R200 * conc
     return M200 * (np.log(1.+xsi) - xsi/(1.+xsi)) / (np.log(1.+conc) - conc/(1.+conc))
+
 
 def NFW_density( r, M200, conc, hFactor=0.6777 ):
     """ Returns the density for an NFW profile.

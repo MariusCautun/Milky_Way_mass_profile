@@ -16,7 +16,7 @@ The code included here is based on the results and the best fitting Milky Way mo
 This is a stand alone python code that only makes use of a few common python modules: numpy and scipy. For the potential, the code uses [galpy](https://docs.galpy.org/en/v1.5.0/), which can be downloaded [here](https://github.com/jobovy/galpy).
  
 You can just download the two python codes and either place them in the working directory, or point python towards the directory where the files are located. The latter can be done by adding the directory path to the environment variable $PYTHONPATH or by adding the path directly within python, for example using:
-```
+```python
 import sys
 dir_path = "absolute_path_to_file_directory"
 if dir_path not in sys.path:
@@ -25,20 +25,23 @@ if dir_path not in sys.path:
  
 ## The Milky Way radial mass profile
 
-If you are interested only in the spherically averaged mass profile of our galaxy, just download the [MW_enclosed_mass_profile.txt](./MW_enclosed_mass_profile.txt) ASCII file. It gives the enclosed mass and its associated 68 percentile confidence interval for a set of radial distances for: stars, all baryons, dark matter, and total matter. 
+If you are interested only in the spherically averaged mass profile of our galaxy, just download the [MW_enclosed_mass_profile.txt](./MW_enclosed_mass_profile.txt) ASCII file. It gives the enclosed mass and its associated 68 percentile confidence interval for a set of radial distances for: stars, all baryons, dark matter, and total matter. These components are shown in the following figure:
+<p align="center">
+    <img src="figures/MW_components.png" width="700" title="A plot of the MW components contained in the 'MW_enclosed_mass_profile.txt' file."></a>
+</p>  
 
-Examples of how to read in the data files and run various tasks are provided in the jupyter notebook file [example_notebook.ipynb](./example_notebook.ipynb) (this is saved as a pdf file at found [here](./example_notebook.pdf)). Some of the examples from the notebook are discussed below. 
+Examples of how to read in the data files and run various tasks are provided in the jupyter notebook file [example_notebook.ipynb](./example_notebook.ipynb) (this is saved also as a pdf file [here](./example_notebook.pdf)). Some of the examples from the notebook are discussed below. 
 
 
 ## Calculating the contracted DM profile for a distribution of baryons
 
 Start by importing the corresponding function:
 
-```
+```python
 from Cautun20_contraction import contract_enclosed_mass
 ```
 This takes two arguments: 1) the enclosed DM mass and 2) the enclosed baryonic mass. Optionally, you can also specify the cosmic baryonic fraction. A quick example on how to calculate the DM profile for a galactic-mass halo that does not contain any baryons:
-```
+```python
 from Cautun20_contraction import NFW_enclosed_mass
 import numpy as np
 
@@ -50,7 +53,7 @@ mass_bar   = 0.                       # no baryons
 mass_DM_contracted = contract_enclosed_mass( mass_DM, mass_bar, f_bar=f_bar )
 ```
 To see the difference, you can compare the original and contracted DM masses:
-```
+```python
 # plot the enclosed mass (actually plots mass / r^2 to decrease the dynamical range)
 
 import matplotlib.pyplot as plt
@@ -63,10 +66,19 @@ plt.show()
 plt.semilogx( r, mass_DM_contracted / mass_DM, label="contracted / original" )
 plt.legend()
 ```
-This is a trivial example and the difference is a constant multiplication factor. When using realistic baryonic distributions, the difference between the original and the contracted DM profiles is more complex (see other examples in the [jupyter notebook](./example_notebook.ipynb)).
+To obtain:
+<p align="center">
+    <img src="figures/Contraction_no_baryons.png" width="700" title="A plot of the DM halo contraction in the absence of baryons."></a>
+</p> 
+
+This is a trivial example and the difference is a constant multiplication factor. When using realistic baryonic distributions, the difference between the original and the contracted DM profiles is more complex (see other examples in the [jupyter notebook](./example_notebook.ipynb)). For example, if we take the MW baryonic distribution given in the [MW_enclosed_mass_profile.txt](./MW_enclosed_mass_profile.txt) file, then we obtain:
+<p align="center">
+    <img src="figures/figures/Contraction_MW_baryons.png" width="700" title="A plot of the DM halo contraction given the MW distribution of stars and gas."></a>
+</p>
+
 
 The code also comes with a simple function that calculates the contracted DM density. For best results, you need to give to the function the spherically averaged DM and baryon densities, as well as the enclosed DM and baryon masses at the same radial distances. The following code calculate the contracted DM density for the same case as above, that is for the case of zero baryonic mass.
-```
+```python
 from Cautun20_contraction import contract_density, NFW_density
 
 # First calculate the NFW radial density profile for the DM component for the same halo used for the enclosed mass calculation.
@@ -80,18 +92,18 @@ density_DM_contracted = contract_density( density_NFW, 0., mass_DM=mass_DM, mass
 
 The package also comes with a set of python functions that implement the best fitting mass profile in the galpy package for galactic dynamics. The mass profile contains 7 components: a thin and a thick stellar disc, an HI and a molecular disc, a stellar bulge, a circumgalactic medium (CGM) component, and a contracted DM halo. To use this mass profile, just load the module included here (this will take about one minute since it performs some calculations when loading the module).
 
-```
+```python
 from Cautun20_galpy_potential import Cautun20
 ```
 Now Cautun20 is a potential including all the components described above. It can be used to calculate various galactic quantities such as circular rotation curve, stellar and satellite orbits. For examples, see the [galpy](https://docs.galpy.org/en/v1.5.0/#tutorials) documentation, such as the one associated to the various [Milky Way potentials](https://docs.galpy.org/en/v1.5.0/reference/potential.html#new-in-v1-5-milky-way-like-potentials) implemented within galpy.
 
 
 You can also access the various components of the potential, such as the halo or the bulge:
-```
+```python
 Cautun_halo, Cautun_Discs, Cautun_Bulge, Cautun_cgm = Cautun20
 ```
 Alternatively, if you need the spherically averaged enclosed DM or baryonic mass profiles, these have been calculated when loading the module and can be accessed as:
-```
+```python
 from Cautun20_galpy_potential import rspace, rho_DM_contracted, MassCum_DM_contracted, MassCum_bar, MassCum_DM_uncontracted
 ```
 where rspace gives the radial values from the Galactic Centre for which the enclosed masses and density were calculated. Note that these quantities are expressed in internal galpy units.

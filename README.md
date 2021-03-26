@@ -13,7 +13,7 @@ The code included here is based on the results and the best fitting Milky Way mo
 
 ## Getting Started
 
-This is a stand alone python code that only makes use of a few common python modules: numpy and scipy. For the potential, the code uses [galpy](https://docs.galpy.org/en/v1.5.0/), which can be downloaded [here](https://github.com/jobovy/galpy).
+This is a stand alone python code that only makes use of a few common python modules: _numpy_ and _scipy_. For the potential, the code uses [galpy](https://docs.galpy.org/), which can be downloaded [here](https://github.com/jobovy/galpy). The potential will be implemented directly in _galpy_ starting with version 1.7.
  
 You can just download the two python codes and either place them in the working directory, or point python towards the directory where the files are located. The latter can be done by adding the directory path to the environment variable $PYTHONPATH or by adding the path directly within python, for example using:
 ```python
@@ -27,7 +27,7 @@ if dir_path not in sys.path:
 
 If you are interested only in the spherically averaged mass profile of our galaxy, just download the [MW_enclosed_mass_profile.txt](./MW_enclosed_mass_profile.txt) ASCII file. It gives the enclosed mass and its associated 68 percentile confidence interval for a set of radial distances for: stars, all baryons, dark matter, and total matter. These components are shown in the following figure:
 <p align="center">
-    <img src="figures/MW_components.png" width="700" title="A plot of the MW components contained in the 'MW_enclosed_mass_profile.txt' file."></a>
+    <img src="figures/MW_components.png" width="550" title="A plot of the MW components contained in the 'MW_enclosed_mass_profile.txt' file."></a>
 </p>  
 
 Examples of how to read in the data files and run various tasks are provided in the jupyter notebook file [example_notebook.ipynb](./example_notebook.ipynb) (this is saved also as a pdf file [here](./example_notebook.pdf)). Some of the examples from the notebook are discussed below. 
@@ -68,12 +68,12 @@ plt.legend()
 ```
 To obtain:
 <p align="center">
-    <img src="figures/Contraction_no_baryons.png" width="700" title="A plot of the DM halo contraction in the absence of baryons."></a>
+    <img src="figures/Contraction_no_baryons.png" width="550" title="A plot of the DM halo contraction in the absence of baryons."></a>
 </p> 
 
 This is a trivial example and the difference is a constant multiplication factor. When using realistic baryonic distributions, the difference between the original and the contracted DM profiles is more complex (see other examples in the [jupyter notebook](./example_notebook.ipynb)). For example, if we take the MW baryonic distribution given in the [MW_enclosed_mass_profile.txt](./MW_enclosed_mass_profile.txt) file, then we obtain:
 <p align="center">
-    <img src="figures/figures/Contraction_MW_baryons.png" width="700" title="A plot of the DM halo contraction given the MW distribution of stars and gas."></a>
+    <img src="figures/figures/Contraction_MW_baryons.png" width="550" title="A plot of the DM halo contraction given the MW distribution of stars and gas."></a>
 </p>
 
 
@@ -90,7 +90,7 @@ density_DM_contracted = contract_density( density_NFW, 0., mass_DM=mass_DM, mass
 
 ## Calculating orbits with the Cautun et al (2020) Galactic mass profile
 
-The package also comes with a set of python functions that implement the best fitting mass profile in the galpy package for galactic dynamics. The mass profile contains 7 components: a thin and a thick stellar disc, an HI and a molecular disc, a stellar bulge, a circumgalactic medium (CGM) component, and a contracted DM halo. To use this mass profile, just load the module included here (this will take about one minute since it performs some calculations when loading the module).
+The package also comes with a set of python functions that implement the best fitting mass profile in the [galpy](https://docs.galpy.org/) package for galactic dynamics. **This potential will be one of the _galpy_ `mw_potentials` starting with version _galpy1.7_.** The mass profile contains 7 components: a thin and a thick stellar disc, an HI and a molecular disc, a stellar bulge, a circumgalactic medium (CGM) component, and a contracted DM halo. To use this mass profile, just load the module included here (this will take about one minute since it performs some calculations when loading the module).
 
 ```python
 from Cautun20_galpy_potential import Cautun20
@@ -102,6 +102,15 @@ You can also access the various components of the potential, such as the halo or
 ```python
 Cautun_halo, Cautun_Discs, Cautun_Bulge, Cautun_cgm = Cautun20
 ```
+For example, the following is a plot of the circular velocity associated to each component of the potential (see the [jupyter notebook]() for the code):
+<p align="center">
+    <img src="figures/figures/MW_components_Vcirc.png" width="550" title="The circular velocity of each component of the Cautun 2020 MW mass model."></a>
+</p>
+The following is a comparison of the total rotation curve with that of the McMillan (2017) MW mass model and. with the Eilers et al (2018) _Gaia DR2_ rotation curve of our galaxy:
+<p align="center">
+    <img src="figures/figures/Cautun20_vs_McMillan17.png" width="550" title="Rotation curve in. Gaia DR2 and two models of the MW mass profile."></a>
+</p>
+
 Alternatively, if you need the spherically averaged enclosed DM or baryonic mass profiles, these have been calculated when loading the module and can be accessed as:
 ```python
 from Cautun20_galpy_potential import rspace, rho_DM_contracted, MassCum_DM_contracted, MassCum_bar, MassCum_DM_uncontracted
@@ -117,7 +126,7 @@ where rspace gives the radial values from the Galactic Centre for which the encl
 ## Reference
 This code and accompanying input data are freely available. If using this code,
 a derivative work or results thereof, please cite:
-[Cautun et al (2020)](https://arxiv.org/abs/1911.04557)
+[Cautun et al (2020)](https://ui.adsabs.harvard.edu/abs/2020MNRAS.494.4291C/abstract)
 
 If you have any questions or would like help in using the code, please email:
 > marius 'dot' cautun 'at' gmail 'dot' com

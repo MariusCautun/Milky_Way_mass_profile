@@ -22,8 +22,8 @@ rhoo = bovy_conversion.dens_in_msolpc3(vo=vo,ro=ro)
 
 #Cautun DM halo
 fb   = 4.825 / 30.7 # Planck 1 baryon fraction
-m200 = 0.97e12  # the DM halo mass
-conc = 9.4
+m200 = 0.969e12  # the DM halo mass
+conc = 8.76
 
 #Cautun Bulge
 r0_bulge  = 0.075/ro

@@ -73,7 +73,7 @@ To obtain:
 
 This is a trivial example and the difference is a constant multiplication factor. When using realistic baryonic distributions, the difference between the original and the contracted DM profiles is more complex (see other examples in the [jupyter notebook](./example_notebook.ipynb)). For example, if we take the MW baryonic distribution given in the [MW_enclosed_mass_profile.txt](./MW_enclosed_mass_profile.txt) file, then we obtain:
 <p align="center">
-    <img src="figures/figures/Contraction_MW_baryons.png" width="550" title="A plot of the DM halo contraction given the MW distribution of stars and gas."></a>
+    <img src="figures/Contraction_MW_baryons.png" width="550" title="A plot of the DM halo contraction given the MW distribution of stars and gas."></a>
 </p>
 
 
@@ -104,11 +104,11 @@ Cautun_halo, Cautun_Discs, Cautun_Bulge, Cautun_cgm = Cautun20
 ```
 For example, the following is a plot of the circular velocity associated to each component of the potential (see the [jupyter notebook]() for the code):
 <p align="center">
-    <img src="figures/figures/MW_components_Vcirc.png" width="550" title="The circular velocity of each component of the Cautun 2020 MW mass model."></a>
+    <img src="figures/MW_components_Vcirc.png" width="550" title="The circular velocity of each component of the Cautun 2020 MW mass model."></a>
 </p>
-The following is a comparison of the total rotation curve with that of the McMillan (2017) MW mass model and. with the Eilers et al (2018) _Gaia DR2_ rotation curve of our galaxy:
+The following is a comparison of the total rotation curve with that of the McMillan (2017) MW mass model and with the Eilers et al (2018) *Gaia DR2* rotation curve of our galaxy:
 <p align="center">
-    <img src="figures/figures/Cautun20_vs_McMillan17.png" width="550" title="Rotation curve in. Gaia DR2 and two models of the MW mass profile."></a>
+    <img src="figures/Cautun20_vs_McMillan17.png" width="550" title="Rotation curve in Gaia DR2 and two models of the MW mass profile."></a>
 </p>
 
 Alternatively, if you need the spherically averaged enclosed DM or baryonic mass profiles, these have been calculated when loading the module and can be accessed as:
